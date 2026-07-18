@@ -1,0 +1,6 @@
+{
+  "name": "PIKO",
+  "description": "Call recording management, lead tele-calling annotation, playback, and synchronizations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
