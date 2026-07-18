@@ -1,0 +1,46 @@
+-- Quick CRM Android cloud API additions. Import into nnvrdjjh_piko_crm.
+
+ALTER TABLE admin_users
+    ADD COLUMN IF NOT EXISTS phone VARCHAR(30) DEFAULT NULL,
+    ADD COLUMN IF NOT EXISTS is_authorized TINYINT(1) NOT NULL DEFAULT 1,
+    ADD COLUMN IF NOT EXISTS access_level VARCHAR(40) NOT NULL DEFAULT 'Full Edit',
+    ADD COLUMN IF NOT EXISTS last_active_at DATETIME DEFAULT NULL;
+
+ALTER TABLE leads
+    ADD COLUMN IF NOT EXISTS company VARCHAR(180) DEFAULT NULL,
+    ADD COLUMN IF NOT EXISTS assigned_caller_name VARCHAR(120) DEFAULT NULL,
+    ADD COLUMN IF NOT EXISTS sentiment VARCHAR(20) NOT NULL DEFAULT 'Neutral',
+    ADD COLUMN IF NOT EXISTS tag_ids VARCHAR(255) DEFAULT NULL;
+
+CREATE TABLE IF NOT EXISTS api_tokens (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    admin_id INT NOT NULL,
+    token_hash CHAR(64) NOT NULL UNIQUE,
+    expires_at DATETIME NOT NULL,
+    last_used_at DATETIME DEFAULT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    KEY idx_api_admin (admin_id),
+    KEY idx_api_expiry (expires_at),
+    CONSTRAINT fk_api_admin FOREIGN KEY (admin_id) REFERENCES admin_users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS mobile_call_records (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    lead_id INT NOT NULL,
+    caller_name VARCHAR(120) DEFAULT NULL,
+    duration_seconds INT NOT NULL DEFAULT 0,
+    notes TEXT DEFAULT NULL,
+    transcript LONGTEXT DEFAULT NULL,
+    recording_status VARCHAR(30) NOT NULL DEFAULT 'Logged',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_mobile_call_lead FOREIGN KEY (lead_id) REFERENCES leads(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS mobile_whatsapp_messages (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    lead_id INT NOT NULL,
+    sender ENUM('Lead','Agent') NOT NULL DEFAULT 'Agent',
+    message_text TEXT NOT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_mobile_wa_lead FOREIGN KEY (lead_id) REFERENCES leads(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

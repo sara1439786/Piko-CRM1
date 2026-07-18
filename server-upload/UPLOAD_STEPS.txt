@@ -1,0 +1,8 @@
+1. In cPanel File Manager open the document root for crm.rscc.in.
+2. Upload the folder named api so the final file is:
+   crm.rscc.in/api/index.php
+3. In phpMyAdmin select nnvrdjjh_piko_crm.
+4. Import api_migration.sql once.
+5. Open https://crm.rscc.in/api/index.php?action=health
+6. It should return JSON containing "ok":true and "database":"connected".
+7. Build and install the Android app, then use the same admin email/password as the web CRM.
