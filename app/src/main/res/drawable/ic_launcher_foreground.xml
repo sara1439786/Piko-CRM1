@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group
+        android:translateX="22"
+        android:translateY="22">
+        <!-- Phone Outline (64dp viewport within translated bounds) -->
+        <path
+            android:fillColor="#3B82F6"
+            android:pathData="M12,4 C7.58,4 4,7.58 4,12 L4,52 C4,56.42 7.58,60 12,60 L52,60 C56.42,60 60,56.42 60,52 L60,12 C60,7.58 56.42,4 52,4 L12,4 Z M32,46 C24.27,46 18,39.73 18,32 C18,24.27 24.27,18 32,18 C39.73,18 46,24.27 46,32 C46,39.73 39.73,46 32,46 Z" />
+        <!-- Record wave indicator inside phone center -->
+        <path
+            android:fillColor="#10B981"
+            android:pathData="M32,24 C27.58,24 24,27.58 24,32 C24,36.42 27.58,40 32,40 C36.42,40 40,36.42 40,32 C40,27.58 36.42,24 32,24 Z" />
+    </group>
+</vector>

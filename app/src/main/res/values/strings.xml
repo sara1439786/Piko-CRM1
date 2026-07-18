@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PIKO</string>
+    <!-- Facebook SDK and OAuth Integration Configurations -->
+    <string name="facebook_app_id">52fdcb9e-6a01-4fa6-9cc3-bedf2c1c01b2</string>
+    <string name="facebook_client_token">f00baa15707feed1234567890abcdef1</string>
+    <string name="fb_login_protocol_scheme">fb52fdcb9e-6a01-4fa6-9cc3-bedf2c1c01b2</string>
+</resources>
